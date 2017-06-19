@@ -15,7 +15,7 @@ fi
 
 echo "Using $ISO_FILE ..."
 
-if [ $(type -Pt mkisofs) != "file" ]; then
+if [ "$(type -Pt mkisofs)" != "file" ]; then
     echo "Installing mkisofs ..."
     yum install -y genisoimage
 fi
