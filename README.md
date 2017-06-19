@@ -10,6 +10,7 @@ curl -fSL http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Min
 git clone https://github.com/subchen/centos-7-kickstart.git
 
 # build KS-CentOS-7-x86_64-Minimal-1611.iso
-./centos-7-kickstart/build-iso.sh ~/CentOS-7-x86_64-Minimal-1611.iso
+cd centos-7-kickstart
+./build-iso.sh ~/CentOS-7-x86_64-Minimal-1611.iso
 ```
 
