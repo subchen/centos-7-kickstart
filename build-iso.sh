@@ -3,8 +3,6 @@
 ROOT=$(cd $(dirname $0); pwd)
 
 ISO_FILE=$1
-MNT_DIR=/tmp/mnt
-ISO_DIR=/tmp/iso
 
 [ -z "$ISO_FILE" ] && ISO_FILE=$(echo $ROOT/CentOS-*.iso)
 
@@ -15,10 +13,16 @@ fi
 
 echo "Using $ISO_FILE ..."
 
-if [ "$(type -Pt mkisofs)" != "file" ]; then
-    echo "Installing mkisofs ..."
-    yum install -y genisoimage
+if [ "$(type -Pt mkisofs)" != "file" ] || [ "$(type -Pt ksvalidator)" != "file" ]; then
+    echo "Installing mkisofs, ksvalidator ..."
+    yum install -y genisoimage pykickstart
 fi
+
+echo "Validating ks.cfg ..."
+ksvalidator -e $ROOT/ks.cfg
+
+MNT_DIR=/tmp/mnt
+ISO_DIR=/tmp/iso
 
 mkdir -p $MNT_DIR
 umount $MNT_DIR > /dev/null 2>&1 || true
