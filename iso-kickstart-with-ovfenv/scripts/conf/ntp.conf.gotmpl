@@ -1,0 +1,13 @@
+driftfile /var/lib/ntp/drift
+
+restrict default nomodify notrap nopeer noquery
+restrict 127.0.0.1
+restrict ::1
+
+{{ if .NTP0 }}server {{ .NTP0 }}{{ end }}
+{{ if .NTP1 }}server {{ .NTP1 }}{{ end }}
+
+includefile /etc/ntp/crypto/pw
+keys /etc/ntp/keys
+
+disable monitor

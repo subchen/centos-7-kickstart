@@ -1,0 +1,6 @@
+*.iso
+*.ova
+*.ovf
+
+.DS_store
+
