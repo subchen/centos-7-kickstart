@@ -13,3 +13,13 @@ git clone https://github.com/subchen/centos-7-kickstart.git
 cd centos-7-kickstart/iso-kickstart-basic
 ./build.sh ~/CentOS-7-x86_64-Minimal-1708.iso
 ```
+
+Build Using Docker
+
+```
+docker run -it --rm \
+  --privileged \
+  -v $CWD:/build \
+  centos:7.3 \
+  /build/build.sh /build/CentOS-7-x86_64-Minimal-1708.iso
+```
