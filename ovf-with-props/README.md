@@ -10,6 +10,10 @@ This is a tool to build a OVF/OVA with centos-7-kickstart.iso and apply vmware o
 ./deploy-vm.sh
 ```
 
+> NOTES: 
+> I am unable to deploy using generated OVA, but I can deploy OVF directly. (Failed on ovftool 4.1, 4.2) 
+> Help me if you know what is the issue.
+
 # How create a OVF template
 
 1. Login VCenter 6.0+
