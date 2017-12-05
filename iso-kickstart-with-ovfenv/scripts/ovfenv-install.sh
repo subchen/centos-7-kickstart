@@ -16,7 +16,7 @@ if [ -f $(type -P vmtoolsd) ]; then
     vmtoolsd --cmd "info-get guestinfo.ovfenv" > $OVFENV_FILE
 elif [ -f $(type -P vmware-guestd) ]; then
     vmware-guestd --cmd "info-get guestinfo.ovfEnv" > $OVFENV_FILE
-else [ -f $(type -P vmware-rpctool) ]; then
+elif [ -f $(type -P vmware-rpctool) ]; then
     vmware-rpctool "info-get guestinfo.ovfEnv" > $OVFENV_FILE
 fi
 
