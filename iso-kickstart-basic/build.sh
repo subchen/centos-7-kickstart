@@ -36,6 +36,7 @@ echo "Generating kickstart file ..."
 cd $CWD
 cp -f ks.cfg $KS_ISO_DIR/ks.cfg
 
+# legacy bois
 if [ "$(grep Kickstart $KS_ISO_DIR/isolinux/isolinux.cfg)" == "" ]; then
     # update timeout and insert a new label before 'label check'
     sed -i \
@@ -45,11 +46,12 @@ if [ "$(grep Kickstart $KS_ISO_DIR/isolinux/isolinux.cfg)" == "" ]; then
         $KS_ISO_DIR/isolinux/isolinux.cfg
 fi
 
+# uefi
 if [ "$(grep Kickstart $KS_ISO_DIR/EFI/BOOT/grub.cfg)" == "" ]; then
     # update timeout and insert a new menu before 'Test this media'
     sed -i \
         -e 's/set timeout=60/set timeout=5/' \
-        -e 's/set default="1"/set default="2"/' \
+        -e 's/set default="1"/set default="1"/' \
         -e '/Test this media/{h;s/.*/cat grub.cfg.part/e;G}' \
         $KS_ISO_DIR/EFI/BOOT/grub.cfg
 fi
@@ -57,11 +59,15 @@ fi
 OUTPUT_ISO_FILE="$(dirname $ISO_FILE)/KS_$(basename $ISO_FILE)"
 echo "Creating $OUTPUT_ISO_FILE ..."
 
-# the param "-V label" must match the vmlinuz label in isolinux/isolinux.cfg
+# Notes:
+# 1. Param "-V label": must match the vmlinuz label in isolinux/isolinux.cfg and EFI/BOOT/grub.cfg
+# 2. LEGACY: -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot
+# 3. UEFI: -eltorito-alt-boot -b images/efiboot.img -no-emul-boot
 cd $KS_ISO_DIR
 mkisofs -R -J -T -joliet-long \
         -boot-load-size 4 -boot-info-table \
-        -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot \
+        -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot \
+        -eltorito-alt-boot -b images/efiboot.img -no-emul-boot \
         -V "CentOS 7 x86_64" \
         -o "$OUTPUT_ISO_FILE" \
         ./
