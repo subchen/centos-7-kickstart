@@ -1,0 +1,11 @@
+[iso-centos]
+name=iso-centos
+baseurl=file:///mnt/cdrom/
+gpgcheck=0
+enabled=0
+
+[iso-repo]
+name=iso-repo
+baseurl=file:///mnt/cdrom/scripts/repo/
+gpgcheck=0
+enabled=0

@@ -1,6 +1,0 @@
-label centos
-  menu label Install CentOS Linux 7 with ^Kickstart
-  menu default
-  kernel vmlinuz
-  append initrd=initrd.img inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 inst.ks=cdrom:/ks.cfg quiet
-

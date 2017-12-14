@@ -1,4 +1,0 @@
-menuentry 'Install CentOS Linux 7 with Kickstart' --class fedora --class gnu-linux --class gnu --class os {
-        linuxefi /images/pxeboot/vmlinuz inst.stage2=hd:LABEL=CentOS\x207\x20x86_64 inst.ks=cdrom:/ks.cfg quiet
-        initrdefi /images/pxeboot/initrd.img
-}
