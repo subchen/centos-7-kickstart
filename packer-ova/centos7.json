@@ -1,0 +1,40 @@
+{
+    "_comment": "exec: `packer build centos7.json`",
+    "builders": [
+        {
+            "vm_name": "centos7",
+            "type": "vmware-iso",
+            "fusion_app_path": "/Applications/VMware Fusion 14.33.47.app/",
+            "iso_url": "./CentOS-7-x86_64-Minimal-1708.iso",
+            "iso_checksum": "5848f2fd31c7acf3811ad88eaca6f4aa",
+            "iso_checksum_type": "md5",
+            "guest_os_type": "centos7-64",
+            "disk_type_id": "0",
+            "disk_size": "128000",
+            "floppy_files": [
+                "./ks.cfg"
+            ],
+            "boot_command": "<tab> inst.text inst.ks=hd:fd0:/ks.cfg <enter><wait>",
+            "ssh_username": "root",
+            "ssh_password": "default",
+            "shutdown_command": "shutdown -P now"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "yum install -y vim"
+            ]
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "shell-local",
+            "inline": [
+                "vmware-vdiskmanager -t 5 -r output-vmware-iso/disk.vmdk ova/disk-output.vmdk",
+                "ovftool ova/centos7.ovf ova/centos7.ova"
+            ]
+        }
+    ]
+}
