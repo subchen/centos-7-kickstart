@@ -5,7 +5,7 @@
             "vm_name": "centos7",
             "type": "vmware-iso",
             "fusion_app_path": "/Applications/VMware Fusion 14.33.47.app/",
-            "iso_url": "./CentOS-7-x86_64-Minimal-1708.iso",
+            "iso_url": "http://mirrors.kernel.org/centos/7.4.1708/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
             "iso_checksum": "5848f2fd31c7acf3811ad88eaca6f4aa",
             "iso_checksum_type": "md5",
             "guest_os_type": "centos7-64",
@@ -32,7 +32,9 @@
         {
             "type": "shell-local",
             "inline": [
-                "vmware-vdiskmanager -t 5 -r output-vmware-iso/disk.vmdk ova/disk-output.vmdk",
+                "vmware-vdiskmanager -t 5 -r output-vmware-iso/disk.vmdk ova/centos7-disk1.vmdk",
+                "export DISK_SIZE=$(stat -c %s ova/centos7-disk1.vmdk 2>/dev/null || stat -f %z ova/centos7-disk1.vmdk)",
+                "frep ova/centos7.ovf.tmpl",
                 "ovftool ova/centos7.ovf ova/centos7.ova"
             ]
         }
