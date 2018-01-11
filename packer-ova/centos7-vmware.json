@@ -1,5 +1,5 @@
 {
-    "_comment": "exec: `packer build centos7.json`",
+    "_comment": "exec: `packer build centos7-vmware.json`",
     "builders": [
         {
             "vm_name": "centos7",
@@ -22,9 +22,15 @@
     ],
     "provisioners": [
         {
+            "type": "file",
+            "source": "./scripts",
+            "destination": "/tmp/"
+        },
+        {
             "type": "shell",
             "inline": [
-                "yum install -y vim"
+                "bash -ex /tmp/scripts/install.sh",
+                "rm -rf /tmp/scripts"
             ]
         }
     ],
@@ -33,8 +39,6 @@
             "type": "shell-local",
             "inline": [
                 "vmware-vdiskmanager -t 5 -r output-vmware-iso/disk.vmdk ova/centos7-disk1.vmdk",
-                "export DISK_SIZE=$(stat -c %s ova/centos7-disk1.vmdk 2>/dev/null || stat -f %z ova/centos7-disk1.vmdk)",
-                "frep ova/centos7.ovf.tmpl",
                 "ovftool ova/centos7.ovf ova/centos7.ova"
             ]
         }
