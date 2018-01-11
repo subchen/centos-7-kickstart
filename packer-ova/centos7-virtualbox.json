@@ -1,0 +1,48 @@
+{
+    "_comment": "exec: `packer build centos7.json`",
+    "builders": [
+        {
+            "vm_name": "centos7",
+            "type": "virtualbox-iso",
+            "format": "ovf",
+            "iso_url": "http://mirrors.kernel.org/centos/7.4.1708/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso",
+            "iso_checksum": "5848f2fd31c7acf3811ad88eaca6f4aa",
+            "iso_checksum_type": "md5",
+            "guest_os_type": "RedHat_64",
+            "hard_drive_interface": "scsi",
+            "disk_size": "256000",
+            "floppy_files": [
+                "./ks.cfg"
+            ],
+            "headless": false,
+            "guest_additions_mode": "disable",
+            "boot_command": "<tab> inst.text inst.ks=hd:fd0:/ks.cfg <enter><wait>",
+            "ssh_username": "root",
+            "ssh_password": "cisco",
+            "shutdown_command": "shutdown -P now"
+        }
+    ],
+    "provisioners": [
+        {
+            "type": "file",
+            "source": "./scripts",
+            "destination": "/tmp/"
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "bash -ex /tmp/scripts/install-local.sh",
+                "rm -rf /tmp/scripts"
+            ]
+        }
+    ],
+    "post-processors": [
+        {
+            "type": "shell-local",
+            "inline": [
+                "cp -f output-virtualbox-iso/*.vmdk ova/centos7-disk.vmdk",
+                "ovftool ova/centos7.ovf ova/centos7.ova"
+            ]
+        }
+    ]
+}
