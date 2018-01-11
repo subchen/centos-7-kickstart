@@ -31,7 +31,7 @@
         {
             "type": "shell",
             "inline": [
-                "bash -ex /tmp/scripts/install-local.sh",
+                "bash -ex /tmp/scripts/install.sh",
                 "rm -rf /tmp/scripts"
             ]
         }
