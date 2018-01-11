@@ -40,8 +40,7 @@
         {
             "type": "shell-local",
             "inline": [
-                "cp -f output-virtualbox-iso/*.vmdk ova/centos7-disk.vmdk",
-                "ovftool ova/centos7.ovf ova/centos7.ova"
+                "bash -ex ./ova/build.sh"
             ]
         }
     ]
