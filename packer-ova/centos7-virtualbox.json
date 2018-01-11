@@ -1,5 +1,5 @@
 {
-    "_comment": "exec: `packer build centos7.json`",
+    "_comment": "exec: `packer build centos7-virtualbox.json`",
     "builders": [
         {
             "vm_name": "centos7",
