@@ -38,8 +38,7 @@
         {
             "type": "shell-local",
             "inline": [
-                "vmware-vdiskmanager -t 5 -r output-vmware-iso/disk.vmdk ova/centos7-disk1.vmdk",
-                "ovftool ova/centos7.ovf ova/centos7.ova"
+                "bash -ex ./ova/build.sh"
             ]
         }
     ]
