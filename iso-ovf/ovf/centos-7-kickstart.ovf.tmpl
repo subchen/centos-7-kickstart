@@ -32,7 +32,7 @@
       <Description>4 CPU Cores, 8 GB RAM, 2 NICs, 256G DISK</Description>
     </Configuration>
     <Configuration ovf:id="LARGE_VM">
-      <Label>Medium VM</Label>
+      <Label>Large VM</Label>
       <Description>8 CPU Cores, 8 GB RAM, 2 NICs, 512G DISK</Description>
     </Configuration>
   </DeploymentOptionSection>
@@ -273,6 +273,7 @@
         <Label>Subnet Mask - eth1</Label>
         <Description>Sets the Subnet Mask for Network Adapter 2 (optional).</Description>
       </Property>
+      <Category>Additional Domain Name Servers</Category>
       <Property ovf:key="domain" ovf:type="string" ovf:userConfigurable="true">
         <Label>Domain</Label>
         <Description>Sets this machine&apos;s domain (optional).</Description>
@@ -281,7 +282,6 @@
         <Label>DNS Searchs</Label>
         <Description>Sets DNS search domain list (optional).</Description>
       </Property>
-      <Category>Additional Domain Name Servers</Category>
       <Property ovf:key="dns0" ovf:type="string" ovf:userConfigurable="true">
         <Label>DNS Forwarder 1</Label>
         <Description>Sets DNS Forwarder (mandatory).</Description>
