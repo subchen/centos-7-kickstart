@@ -10,10 +10,11 @@
             "iso_checksum_type": "md5",
             "guest_os_type": "centos7-64",
             "disk_type_id": "0",
-            "disk_size": "128000",
+            "disk_size": "256000",
             "floppy_files": [
                 "./ks.cfg"
             ],
+            "headless": false,
             "boot_command": "<tab> inst.text inst.ks=hd:fd0:/ks.cfg <enter><wait>",
             "ssh_username": "root",
             "ssh_password": "default",
