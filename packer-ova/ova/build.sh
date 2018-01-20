@@ -16,6 +16,8 @@ cp -f $CWD/../output-*/*.vmdk $VM_DISK_FILE
 # vmware-fusion compress disk
 #vmware-vdiskmanager -t 5 -r $CWD/../output-*/*.vmdk $VM_DISK_FILE
 
-frep $CWD/centos7.ovf.tmpl --overwrite -e VM_DISK_SIZE=$(stat -c %s $VM_DISK_FILE 2>/dev/null || stat -f %z $VM_DISK_FILE)
+#frep $CWD/centos7.ovf.tmpl --overwrite -e VM_DISK_SIZE=$(stat -c %s $VM_DISK_FILE 2>/dev/null || stat -f %z $VM_DISK_FILE)
+
+frep $CWD/centos7.ovf.tmpl --overwrite -e CWD="$CWD"
 
 "$ovftool" --skipManifestCheck --overwrite $CWD/centos7.ovf $CWD/centos7.ova
